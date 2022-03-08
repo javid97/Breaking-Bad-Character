@@ -5,7 +5,7 @@ import Pagination from "./Pagination";
 import Search from "./Search";
 import "./App.css";
 const API_URL =
-  "https://www.breakingbadapi.com/api/characters?limit=12&offset=";
+  "https://www.breakingbadapi.com/api/characters?limit=10&offset=";
 function App() {
   const [characters, setCharacters] = useState([]);
   const [prevCharacters, setPrevCharacters] = useState([]);
