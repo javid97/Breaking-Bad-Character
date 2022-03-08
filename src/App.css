@@ -71,7 +71,8 @@ header h1 span.ba{
 .character-container{
   position: relative;
   width: 11rem;
-  height: 15rem;
+  height: 14rem;
+  cursor: pointer;
 }
 .card{
   position: absolute;

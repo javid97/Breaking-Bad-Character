@@ -9,6 +9,7 @@ const API_URL =
 function App() {
   const [characters, setCharacters] = useState([]);
   const [prevCharacters, setPrevCharacters] = useState([]);
+  const [error, setError] = useState("Loading please wait...");
   const [page, setPage] = useState(0);
   const [search, setSearch] = useState("");
 
@@ -29,9 +30,13 @@ function App() {
           ch.nickname.toLowerCase().includes(str.toLowerCase()) ||
           ch.portrayed.toLowerCase().includes(str.toLowerCase())
       );
+      if(temp.length === 0) setError('Oops! character not found')
     setCharacters([...temp]);
   }
-    else setCharacters(prevCharacters);
+    else{
+      setCharacters(prevCharacters);
+      setError("Loading please wait...");
+    }
   }
 
   useEffect(() => {
@@ -52,7 +57,7 @@ function App() {
     <>
       <Header />
       <Search handleSearch={handleSearch} search={search} searchCharacters={searchCharacters}/>
-      <CharacterList characterList={characters} />
+      <CharacterList characterList={characters} error={error}/>
       {characters.length === 0 ? null : <Pagination page={page} changePage={changePage}/>}
     </>
   );
