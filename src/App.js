@@ -12,6 +12,7 @@ function App() {
   const [page, setPage] = useState(0);
   const [search, setSearch] = useState("");
 
+
   const handleSearch = (value) => {
     setSearch(value);
   }
@@ -20,14 +21,23 @@ function App() {
     setPage(pageNumber);
   }
 
-  const searchCharacters = () => {
-    
+  const searchCharacters = (str) => {
+    if(str !== ""){
+      const temp = prevCharacters.filter(
+        (ch) =>
+          ch.name.toLowerCase().includes(str.toLowerCase()) ||
+          ch.nickname.toLowerCase().includes(str.toLowerCase()) ||
+          ch.portrayed.toLowerCase().includes(str.toLowerCase())
+      );
+    setCharacters([...temp]);
+  }
+    else setCharacters(prevCharacters);
   }
 
   useEffect(() => {
     async function getCharacters() {
       try {
-        const response = await fetch(`${API_URL}${page}`);
+        const response = await fetch(`${API_URL}${page * 10}`);
         const data = await response.json();
         setCharacters(data);
         setPrevCharacters(data);
@@ -41,9 +51,9 @@ function App() {
   return (
     <>
       <Header />
-      <Search handleSearch={handleSearch} search={search}/>
+      <Search handleSearch={handleSearch} search={search} searchCharacters={searchCharacters}/>
       <CharacterList characterList={characters} />
-      <Pagination changePage={changePage}/>
+      {characters.length === 0 ? null : <Pagination page={page} changePage={changePage}/>}
     </>
   );
 }

@@ -3,10 +3,14 @@
   padding: 0px;
   box-sizing: border-box;
 }
+html{
+  background: linear-gradient(#042a1b, #030c08);
+  background-repeat: no-repeat;
+  background-size: auto;
+}
 body{
   width: 100vw;
-  height: auto;
-  background: linear-gradient(#042a1b, #030c08);
+  min-height: 100vh;
   /* padding: 2rem; */
   overflow-x: hidden;
 }
@@ -16,7 +20,7 @@ header{
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding: 2rem;
+  padding: .8rem;
 }
 header h1{
   color: #fff;
@@ -53,16 +57,18 @@ header h1 span.ba{
 
 .character-list-container{
   width: 60%;
-  min-height: 100vh;
-  margin: 1rem auto;
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(150px, 150px));
-  grid-template-rows: repeat(auto-fit, minmax(200px, 200px));
-  grid-gap: .5rem;
+  margin: .5rem auto;
+  display: flex;
+  justify-content: center;
+  gap: .5rem;
+  flex-wrap: wrap;
 }
 
 .character-container{
   position: relative;
+  min-width: 150px;
+  max-width: 200px;
+  height: 200px;
 }
 .card{
   position: absolute;
@@ -100,14 +106,40 @@ header h1 span.ba{
   display: flex;
   justify-content: center;
   align-items: center;
-  margin: 1rem auto;
-  
+  margin: .5rem auto;
   gap: .5rem;
 }
 .pagination button{
-  padding: .5rem 1rem;
+  padding: .2rem .5rem;
+  border-radius: .1rem;
   background:rgb(11, 82, 53);
   color: #ddd;
   border: none;
   cursor: pointer;
+}
+
+.pagination button.active-page{
+  background: #021d13;
+  border: 2px solid #238a61;
+}
+
+@media only screen and (max-width:1300px){
+  .character-list-container{
+    width: 70%;
+  }
+}
+@media only screen and (max-width:1123px){
+  .character-list-container{
+    width: 90%;
+  }
+}
+@media only screen and (max-width:700px){
+  .character-list-container{
+    width: 95%;
+  }
+}
+@media only screen and (max-width:375px){
+  .search input{
+    width: 250px;
+  }
 }

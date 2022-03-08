@@ -2,7 +2,7 @@ const Character = ({ data }) => {
      const {name, portrayed, nickname, birthday, status, img} = data;
      const style={
           backgroundImage:`url(${img})`,
-          backgroundSize: 'cover',
+          backgroundSize: '100% 100%',
           backgroundRepeat: 'no-repeat',
           backgroundPosition: '100% 100%'
      }
