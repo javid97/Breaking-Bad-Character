@@ -11,7 +11,6 @@ html{
 body{
   width: 100vw;
   min-height: 100vh;
-  /* padding: 2rem; */
   overflow-x: hidden;
 }
 
@@ -20,11 +19,11 @@ header{
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding: .8rem;
+  padding: 1rem;
 }
 header h1{
   color: #fff;
-  font-size: 1.7rem;
+  font-size: 2rem;
 }
 
 header h1 span{
@@ -57,17 +56,21 @@ header h1 span.ba{
 
 .character-list-container{
   width: 60%;
-  margin: .5rem auto;
+  margin: 1rem auto;
   display: flex;
   justify-content: center;
-  gap: .5rem;
+  gap: .7rem;
   flex-wrap: wrap;
+}
+
+.character-list-container h2{
+  font-size: 1.7rem;
+  color: #ac2020;
 }
 
 .character-container{
   position: relative;
-  min-width: 150px;
-  max-width: 200px;
+  width: 150px;
   height: 200px;
 }
 .card{
@@ -135,7 +138,7 @@ header h1 span.ba{
 }
 @media only screen and (max-width:700px){
   .character-list-container{
-    width: 95%;
+    width: 100%;
   }
 }
 @media only screen and (max-width:375px){
