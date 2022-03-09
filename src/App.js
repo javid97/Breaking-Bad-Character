@@ -1,64 +1,27 @@
-import { useState, useEffect } from "react";
 import Header from "./Header";
 import CharacterList from "./CharacterList";
+import IndividualCharacter from "./IndividualCharacter";
 import Pagination from "./Pagination";
 import Search from "./Search";
+import Loader from "./Loader";
+import DataContext from "./DataContext";
+import { useContext } from "react";
 import "./App.css";
-const API_URL =
-  "https://www.breakingbadapi.com/api/characters?limit=10&offset=";
+
 function App() {
-  const [characters, setCharacters] = useState([]);
-  const [prevCharacters, setPrevCharacters] = useState([]);
-  const [error, setError] = useState("Loading please wait...");
-  const [page, setPage] = useState(0);
-  const [search, setSearch] = useState("");
-
-
-  const handleSearch = (value) => {
-    setSearch(value);
-  }
-
-  const changePage = (pageNumber) => {
-    setPage(pageNumber);
-  }
-
-  const searchCharacters = (str) => {
-    if(str !== ""){
-      const temp = prevCharacters.filter(
-        (ch) =>
-          ch.name.toLowerCase().includes(str.toLowerCase()) ||
-          ch.nickname.toLowerCase().includes(str.toLowerCase()) ||
-          ch.portrayed.toLowerCase().includes(str.toLowerCase())
-      );
-      if(temp.length === 0) setError('Oops! character not found')
-    setCharacters([...temp]);
-  }
-    else{
-      setCharacters(prevCharacters);
-      setError("Loading please wait...");
-    }
-  }
-
-  useEffect(() => {
-    async function getCharacters() {
-      try {
-        const response = await fetch(`${API_URL}${page * 10}`);
-        const data = await response.json();
-        setCharacters(data);
-        setPrevCharacters(data);
-      } catch (err) {
-        console.log(err);
-      }
-    }
-    getCharacters();
-  }, [page]);
-
+  const { loading, characters, showIndividual } = useContext(DataContext);
   return (
     <>
       <Header />
-      <Search handleSearch={handleSearch} search={search} searchCharacters={searchCharacters}/>
-      <CharacterList characterList={characters} error={error}/>
-      {characters.length === 0 ? null : <Pagination page={page} changePage={changePage}/>}
+      <Search />
+      {showIndividual ? (
+        <IndividualCharacter />
+      ) : loading ? (
+        <Loader />
+      ) : (
+        <CharacterList />
+      )}
+      {characters.length === 0 ? null : !showIndividual ? <Pagination /> : null}
     </>
   );
 }

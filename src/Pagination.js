@@ -1,5 +1,8 @@
+import { useContext } from "react";
+import DataContext from "./DataContext";
 
-const Pagination = ({page, changePage}) => {
+const Pagination = () => {
+  const {page, changePage} = useContext(DataContext)
   return (
     <div className="pagination">
       <button

@@ -1,4 +1,9 @@
+import { useContext } from "react";
+import DataContext from "./DataContext";
+
+
 const Character = ({ data }) => {
+    const {renderIndividualCharacter} = useContext(DataContext);
      const {name, portrayed, nickname, birthday, status, img} = data;
      const style={
           backgroundImage:`url(${img})`,
@@ -7,7 +12,7 @@ const Character = ({ data }) => {
           backgroundPosition: '100% 100%'
      }
   return (
-    <div className="character-container">
+    <div className="character-container" onClick={() => renderIndividualCharacter(true, data)}>
       <div className="card">
         <div className="card-front" style={style}>
         </div>

@@ -1,11 +1,13 @@
+import { useContext } from "react";
 import Character from "./Character";
-
-const CharacterList = ({characterList, error}) => {
+import DataContext from "./DataContext";
+const CharacterList = () => {
+  const {characters, error} = useContext(DataContext);
 
   return (
     <div className="character-list-container">
-      {characterList.length === 0 ? <h2>{error}</h2> :
-        characterList.map((character, idx) => (
+      {characters.length === 0 ? <h2>{error}</h2> :
+        characters.map((character, idx) => (
           <Character key={character.char_id} data={character} />
         ))}
     </div>

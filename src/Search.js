@@ -1,6 +1,8 @@
-import React from 'react'
+import React, { useContext } from 'react'
+import DataContext from './DataContext'
 
-const Search = ({search,handleSearch, searchCharacters}) => {
+const Search = () => {
+  const {search, handleSearch, searchCharacters} = useContext(DataContext);
      
   return (
     <div className='search'>
