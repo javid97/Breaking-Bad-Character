@@ -1,40 +1,21 @@
 import { useContext } from "react";
 import DataContext from "./DataContext";
+import PaginationButton from "./PaginationButton";
 
 const Pagination = () => {
-  const {page, changePage} = useContext(DataContext)
+  const {allCharacters} = useContext(DataContext)
+  const createPageArray = () => {
+    const total = parseInt(allCharacters.length / 10);
+    let pageArr = [];
+    for(let i = 0; i < total; i++) pageArr.push(i);
+    return pageArr;
+  }
+  const pageNumbers = createPageArray();
   return (
     <div className="pagination">
-      <button
-        className={page === 0 ? "active-page" : null}
-        onClick={(e) => changePage(0)}
-      >
-        1
-      </button>
-      <button
-        className={page === 1 ? "active-page" : null}
-        onClick={(e) => changePage(1)}
-      >
-        2
-      </button>
-      <button
-        className={page === 2 ? "active-page" : null}
-        onClick={(e) => changePage(2)}
-      >
-        3
-      </button>
-      <button
-        className={page === 3 ? "active-page" : null}
-        onClick={(e) => changePage(3)}
-      >
-        4
-      </button>
-      <button
-        className={page === 4 ? "active-page" : null}
-        onClick={(e) => changePage(4)}
-      >
-        5
-      </button>
+      {
+        pageNumbers.map(page => <PaginationButton key={page} pageNum={page}/>)
+      }
     </div>
   );
 }

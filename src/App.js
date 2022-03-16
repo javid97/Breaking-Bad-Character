@@ -9,7 +9,7 @@ import { useContext } from "react";
 import "./App.css";
 
 function App() {
-  const { loading, characters, showIndividual } = useContext(DataContext);
+  const { loading, currentCharacters, showIndividual } = useContext(DataContext);
   return (
     <>
       <Header />
@@ -21,7 +21,7 @@ function App() {
       ) : (
         <CharacterList />
       )}
-      {characters.length === 0 ? null : !showIndividual ? <Pagination /> : null}
+      {currentCharacters.length < 10 ? null : !showIndividual ? <Pagination /> : null}
     </>
   );
 }
